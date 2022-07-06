@@ -1,5 +1,9 @@
-SECRET_KEY= PASSW0R1*_?
-PGSQL_HOST=localhost
-PGSQL_USER=postgres
-PGSQL_PASSWORD=123456789
-PGSQL_DATABASE=python_flask_rest_api
+from decouple import config # Objeto que nos permite sacar variables de entorno 
+
+class Config:
+    SECRET_KEY-config('SECRET_KEY')  # Lee la la llave de el archivo .env
+
+class DevelopmenConfig(config):     # Se recibe config 
+    DEBUG=True       # esto es para cuando se haga un cambio el servidor se refresque solo
+
+config
