@@ -6,4 +6,6 @@ class Config:
 class DevelopmenConfig(config):     # Se recibe config 
     DEBUG=True       # esto es para cuando se haga un cambio el servidor se refresque solo
 
-config
+config={  # Se crea un diccionario para regresar la llave de development con la llave de DevelopmentConfig
+    'development': DevelopmenConfig
+}
