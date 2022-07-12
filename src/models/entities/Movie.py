@@ -1,3 +1,4 @@
+from utils.DateFormat import DateFormat # importamos la clase DateFormat para pasar el formato de la fecha
 class Movie():
     def __init__(self, id, title=None, duration=None, release=None) -> None:  # __init__ es el constructor de la clase
         self.id=id   # Son atributos de clase
@@ -10,7 +11,7 @@ class Movie():
             'id' : self.id,
             'title' : self.title,
             'duration' : self.duration,
-            'released' : self.released
+            'released' : DateFormat.convert_date(self.released) # resive el valor del la fecha con el formato dia, mes y año
         }
     
            
