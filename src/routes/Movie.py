@@ -1,8 +1,17 @@
-from email import message
 from flask import Blueprint, jsonify
 
-main= Blueprint('movie-blueprint', __name__) #esto es lo que necesita el Blueprint para poder crearse
+# Models
 
-@main.route('/') # Ruta raiz
+from models.MovieModel import MovieModel
+
+# esto es lo que necesita el Blueprint para poder crearse
+main = Blueprint('movie_blueprint', __name__)
+
+
+@main.route('/')  # Ruta raiz
 def get_movies():
-    return jsonify({'message': "prueba"})
+    try:
+        movies = MovieModel.get_movies() # se le manda la los resultados de la iteracion del for 
+        return jsonify(movies) # convierte el archivo en formato .json
+    except Exception as ex:
+        return jsonify({'message': str(ex)}), 500  # Regresa error cuando hay un error por parte del servidor 
