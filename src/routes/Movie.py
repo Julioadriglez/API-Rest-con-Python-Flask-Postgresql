@@ -17,3 +17,17 @@ def get_movies():
     except Exception as ex:
         # Regresa error cuando hay un error por parte del servidor
         return jsonify({'message': str(ex)}), 500
+
+@main.route('/<id>')
+def get_movie(id):
+    try:
+        movie = MovieModel.get_movie(id)
+        if movie != None:
+            return jsonify(movie)
+        else:
+            return jsonify({}), 404
+    except Exception as ex:
+        # Regresa error cuando hay un error por parte del servidor
+        return jsonify({'message': str(ex)}), 500
+
+        
