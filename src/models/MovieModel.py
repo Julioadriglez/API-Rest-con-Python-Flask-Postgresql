@@ -21,4 +21,23 @@ class MovieModel():
             return movies
         except Exception as ex:
             raise Exception(ex)
+    
+    @classmethod
+    def get_movie(self, id): # Filtrar paelicula por
+        try:
+            connection = get_connection() # Para que me obtenga la conección
+            
+            with connection.cursor() as cursor: # Esta es la conección a la base de datos
+                cursor.execute("SELECT id, title, duration, released FROM movie  WHERE id = %s", (id,)) # se hace la consulta mediante el id
+                row = cursor.fetchone() 
+                
+                movie = None
+                if row != None:
+                    movie = Movie(row[0], row[1], row[2], row[3]) #Es para que me muestre los 4 datos cada iteracion del "for"
+                    movie = movie.to_JSON() # La conneción la regresa en formato .json
+                    
+            connection.close() #para cerrar la coneccion
+            return movie
+        except Exception as ex:
+            raise Exception(ex)
         
