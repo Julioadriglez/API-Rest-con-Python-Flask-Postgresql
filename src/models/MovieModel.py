@@ -51,6 +51,22 @@ class MovieModel():
                                 VALUES (%s, %s, %s, %s)""",(movie.id, movie.title, movie.duration, movie.released)) # Se envia la informacion a la DB
                 affected_rows = cursor.rowcount # Saca cuantas filas a afectado y Filas que se afectan al hacer la inserción
                 connection.commit() # Para confirmar los cambios que estoy haciendo
+            
+            connection.close() #para cerrar la coneccion
+            return affected_rows # Regresamos las filas afectadas
+        except Exception as ex:
+            raise Exception(ex)
+        
+    @classmethod
+    def delete_movie(self, movie): # Insertar peliculas
+        try:
+            connection = get_connection() # Para que me obtenga la conección
+            
+            with connection.cursor() as cursor: # Esta es la conección a la base de datos
+                cursor.execute("DELETE FROM movie WHERE id = %s",(movie.id)) # Se envia la informacion a la DB
+                affected_rows = cursor.rowcount # Saca cuantas filas a afectado y Filas que se afectan al hacer la inserción
+                connection.commit() # Para confirmar los cambios que estoy haciendo
+            
             connection.close() #para cerrar la coneccion
             return affected_rows # Regresamos las filas afectadas
         except Exception as ex:
