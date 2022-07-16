@@ -52,3 +52,19 @@ def add_movie():
             
     except Exception as ex:  # Regresa error cuando hay un error por parte del servidor
         return jsonify({'message': str(ex)}), 500
+
+
+@main.route('/delete/<id>',methods=['DELETE'])  # Ruta para registrar datos
+def delete_movie():
+    try:
+        movie = Movie(id)
+        
+        affected_rows = MovieModel.delete_movie(movie)
+        
+        if affected_rows == 1:
+            return jsonify(movie.id)
+        else:
+            return jsonify({'message' : "No movie delete"}), 404
+            
+    except Exception as ex:  # Regresa error cuando hay un error por parte del servidor
+        return jsonify({'message': str(ex)}), 500
